@@ -17,6 +17,8 @@ public class MainWOWii {
 		//Hier können dem Provider mit addConsumer ebensolche hinzugefügt werden
 		
 		provider.start();
+	
+		
 		
 	}
 }

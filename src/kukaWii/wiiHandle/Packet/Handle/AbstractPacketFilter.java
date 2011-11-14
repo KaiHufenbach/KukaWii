@@ -41,8 +41,15 @@ public abstract class AbstractPacketFilter extends AbstractPacketProvider implem
 		}).start();	
 	}
 	
+	@Override
 	public void stop(){
 		this.run = false;
 	}
+
+	@Override
+	public void checkAntwortzeit(AbstractPacket packet) {
+	}
+	
+	
 	
 }

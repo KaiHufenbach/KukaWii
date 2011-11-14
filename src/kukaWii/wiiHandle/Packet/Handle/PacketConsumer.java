@@ -23,4 +23,14 @@ public interface PacketConsumer {
 	 * Lässt einen Consumer starten.
 	 */
 	public void start();
+	
+	/**
+	 * Lässt einen Consumer anhalten.
+	 */
+	public void stop();
+	
+	/**
+	 * Überprüft die Antwortzeit.
+	 */
+	public void checkAntwortzeit(AbstractPacket packet);
 }

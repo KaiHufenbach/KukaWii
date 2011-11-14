@@ -18,6 +18,8 @@ public abstract class AbstractPacketProvider {
 	private BlockingQueue<AbstractPacket> out = new ArrayBlockingQueue<AbstractPacket>(10000, true);
 	private Lock providerLock = new ReentrantLock(true);
 	private PacketConsumer consumer = null;
+	private PacketConsumer lastConsumer = null;
+	private boolean interrupt = false;
 	
 	/**
 	 * Methode, um ein Packet in die OutputQueue zu schieben
@@ -27,9 +29,11 @@ public abstract class AbstractPacketProvider {
 		providerLock.lock();
 		try{
 			//Ermöglicht eine Zirkulation der Pakete, wenn kein Verbrauch stattfindet.
-			if(!out.offer(packet)){
-				out.poll();
-				out.offer(packet);
+			if(!interrupt){
+				if(!out.offer(packet)){
+					out.poll();
+					out.offer(packet);
+				}
 			}
 		}finally{
 			providerLock.unlock();
@@ -44,6 +48,7 @@ public abstract class AbstractPacketProvider {
 	 * @param consumer
 	 */
 	public void addConsumer(PacketConsumer consumer){
+		lastConsumer = consumer;
 		if(this.consumer != null){
 			((AbstractPacketProvider)this.consumer).addConsumer(consumer);
 		}else{
@@ -51,6 +56,29 @@ public abstract class AbstractPacketProvider {
 			this.consumer.registerQueue(out);
 			this.consumer.start();
 		}
+	}
+	
+	/**
+	 * Notfallinterrupt, nur durch Exception aufzurufen!
+	 */
+	public void panicInterrupt(){
+		lastConsumer.stop();
+		this.consumer.stop();
+	}
+	
+	/**
+	 * Zum temporären unterbrechen des Paketstromes.
+	 * Alle Pakete werden ab hier gedropt.
+	 */
+	public void interrupt(){
+		this.interrupt=true;
+	}
+	
+	/**
+	 * Ab diesem Aufruf werden wieder Pakete erzeugt.
+	 */
+	public void uninterrupt(){
+		this.interrupt=false;
 	}
 	
 }

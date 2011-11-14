@@ -5,11 +5,19 @@ import kukaWii.wiiHandle.DataCollector;
 import kukaWii.wiiHandle.PersistenceConsumer;
 import motej.Mote;
 
-
+/**
+ * Nur diese Klasse besitzt die Security-Features.
+ * @author Kai
+ *
+ */
 public class Main {
 	
 	private static Main singleton;
 	private Connection connection;
+	
+	
+	//Aus Sicherheitsgründen
+	private DataCollector collector;
 	
 	
 	public static void main(String[] args){
@@ -18,14 +26,20 @@ public class Main {
 	
 	
 	private Main(){
+		System.setProperty("InterruptCheck", "100");
 		connection = new Connection();
 		Mote mote = connection.getRemote();
-		DataCollector collector = new DataCollector(mote);
+		collector = new DataCollector(mote);
 		collector.addConsumer(new PersistenceConsumer());
 	}
 
 
-	public static Main getController() {
+	public DataCollector getCollector() {
+		return collector;
+	}
+
+
+	public static Main getInstance() {
 		return singleton;
 	}
 	

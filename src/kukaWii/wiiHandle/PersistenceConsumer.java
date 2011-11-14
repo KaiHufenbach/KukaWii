@@ -1,3 +1,4 @@
+
 package kukaWii.wiiHandle;
 
 import java.io.FileNotFoundException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
+import kukaWii.wiiHandle.Packet.Base.AccelerometerPacket;
 import kukaWii.wiiHandle.Packet.Base.MotionPlusPacket;
 import kukaWii.wiiHandle.Packet.Handle.AbstractPacketConsumer;
 
@@ -34,7 +36,7 @@ public class PersistenceConsumer extends AbstractPacketConsumer{
 				mopluTimestamp = packet.getTimestamp();
 				mopluPackets = 0;
 			}
-		}else{
+		}else if(packet instanceof AccelerometerPacket){
 			accelPackets++;
 			if(accelPackets%sysoutRate==0){
 				System.out.println("AccelPacket Speed: "+(sysoutRate*1000/(packet.getTimestamp() -accelTimestamp))+" Packets/sec");
