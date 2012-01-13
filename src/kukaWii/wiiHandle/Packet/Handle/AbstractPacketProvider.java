@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
-
+import kukaWii.wiiHandle.Packet.Filter.AbstractPacketFilter;
 /**
  * Abstrakte Klasse, um WiiPakete anzubieten.
  * Dazu muss die Methode providePacket genutzt werden.
@@ -19,6 +19,7 @@ public abstract class AbstractPacketProvider {
 	private Lock providerLock = new ReentrantLock(true);
 	private PacketConsumer consumer = null;
 	private PacketConsumer lastConsumer = null;
+	private AbstractPacketFilter filter = null;
 	private boolean interrupt = false;
 	
 	/**
@@ -56,6 +57,15 @@ public abstract class AbstractPacketProvider {
 			this.consumer.registerQueue(out);
 			this.consumer.start();
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void addFilter(AbstractPacketFilter filter){
+		this.filter = filter;
+		this.filter.registerQueue(out);
+		this.filter.start();
 	}
 	
 	/**

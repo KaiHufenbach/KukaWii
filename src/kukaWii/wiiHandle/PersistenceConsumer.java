@@ -32,6 +32,7 @@ public class PersistenceConsumer extends AbstractPacketConsumer{
 		if(packet instanceof MotionPlusPacket){
 			mopluPackets++;
 			if(mopluPackets%sysoutRate==0){
+				System.out.println("consumer");
 				System.out.println("MotionPlus Speed: "+(sysoutRate*1000/(packet.getTimestamp() -mopluTimestamp))+" Packets/sec");
 				mopluTimestamp = packet.getTimestamp();
 				mopluPackets = 0;

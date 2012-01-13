@@ -2,6 +2,7 @@ package kukaWii.wiiHandle.Packet.Handle;
 
 import java.util.concurrent.BlockingQueue;
 
+import kukaWii.main.AbstractMain;
 import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
 import kukaWii.wiiHandle.Security.InterruptException;
 
@@ -21,7 +22,12 @@ public abstract class AbstractPacketConsumer implements PacketConsumer{
 	 * Muss von den Consumern aufgerufen werden
 	 */
 	public AbstractPacketConsumer(){
-		differenceCheck = Integer.parseInt(System.getProperty("InterruptCheck"));
+		try {
+			differenceCheck = Integer.parseInt(System.getProperty("InterruptCheck"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			differenceCheck = 100;
+		}
 	}
 	
 	@Override
@@ -58,8 +64,10 @@ public abstract class AbstractPacketConsumer implements PacketConsumer{
 	public void checkAntwortzeit(AbstractPacket packet) {
 		if(packet != null){
 			long difference = System.currentTimeMillis()-packet.getTimestamp();
+			if (AbstractMain.getInstance().getSimulation() == false) {
 			if(difference>differenceCheck){
 				throw new InterruptException("Zu lange Antwortzeit: "+difference+"ms");
+			}
 			}
 		}
 		

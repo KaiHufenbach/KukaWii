@@ -10,15 +10,12 @@ import motej.Mote;
  * @author Kai
  *
  */
-public class Main {
+public class Main extends AbstractMain {
 	
-	private static Main singleton;
 	private Connection connection;
 	
 	
 	//Aus Sicherheitsgründen
-	private DataCollector collector;
-	
 	
 	public static void main(String[] args){
 		singleton = new Main();
@@ -33,16 +30,6 @@ public class Main {
 		collector.addConsumer(new PersistenceConsumer());
 	}
 
-
-	public DataCollector getCollector() {
-		return collector;
-	}
-
-
-	public static Main getInstance() {
-		return singleton;
-	}
-	
 	public Connection getConnection(){
 		return connection;
 	}

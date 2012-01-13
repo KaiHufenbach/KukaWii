@@ -1,8 +1,10 @@
-package kukaWii.wiiHandle.Packet.Handle;
+package kukaWii.wiiHandle.Packet.Filter;
 
 import java.util.concurrent.BlockingQueue;
 
 import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
+import kukaWii.wiiHandle.Packet.Handle.AbstractPacketProvider;
+import kukaWii.wiiHandle.Packet.Handle.PacketConsumer;
 
 public abstract class AbstractPacketFilter extends AbstractPacketProvider implements PacketConsumer{
 	
