@@ -1,6 +1,5 @@
 package kukaWii.wiiHandle.Security;
 
-import kukaWii.main.AbstractMain;
 
 /**
  * Eigene Exception um einen gezielten Abbruch zu realisieren.
@@ -16,8 +15,9 @@ public class InterruptException extends RuntimeException{
 
 	public InterruptException(String reason){
 		super(reason);
-		if (AbstractMain.getInstance().getSimulation() == false){
-		AbstractMain.getInstance().getCollector().panicInterrupt();
+		if (System.getProperty("Simulation").equals("false")){
+			//SecurityService Zugriff...
+			SecurityService.getInstance().getDataCollector().panicInterrupt();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle;
+package kukaWii.wiiHandle.Internal;
 
 import motej.Mote;
 import motej.MoteFinder;

@@ -1,5 +1,5 @@
 
-package kukaWii.wiiHandle;
+package kukaWii.wiiHandle.Consumer;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,10 +8,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
-import kukaWii.wiiHandle.Packet.Base.AccelerometerPacket;
-import kukaWii.wiiHandle.Packet.Base.MotionPlusPacket;
-import kukaWii.wiiHandle.Packet.Handle.AbstractPacketConsumer;
+import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.Packet.AccelerometerPacket;
+import kukaWii.wiiHandle.Packet.MotionPlusPacket;
 
 public class PersistenceConsumer extends AbstractPacketConsumer{
 

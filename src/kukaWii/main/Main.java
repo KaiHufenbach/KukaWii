@@ -1,8 +1,9 @@
 package kukaWii.main;
 
-import kukaWii.wiiHandle.Connection;
-import kukaWii.wiiHandle.DataCollector;
-import kukaWii.wiiHandle.PersistenceConsumer;
+import kukaWii.wiiHandle.Consumer.PersistenceConsumer;
+import kukaWii.wiiHandle.Internal.Connection;
+import kukaWii.wiiHandle.Provider.DataCollector;
+import kukaWii.wiiHandle.Security.SecurityService;
 import motej.Mote;
 
 /**
@@ -10,23 +11,26 @@ import motej.Mote;
  * @author Kai
  *
  */
-public class Main extends AbstractMain {
+public class Main {
 	
 	private Connection connection;
+	private DataCollector collector;
 	
 	
 	//Aus Sicherheitsgründen
 	
 	public static void main(String[] args){
-		singleton = new Main();
+		new Main();
 	}
 	
 	
 	private Main(){
 		System.setProperty("InterruptCheck", "100");
+		System.setProperty("Simulation", "false");
 		connection = new Connection();
 		Mote mote = connection.getRemote();
 		collector = new DataCollector(mote);
+		SecurityService.createSecurityService(collector);
 		collector.addConsumer(new PersistenceConsumer());
 	}
 

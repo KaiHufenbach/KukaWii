@@ -1,34 +1,32 @@
 package kukaWii.main;
 
-import kukaWii.wiiHandle.Connection;
-import kukaWii.wiiHandle.PersistenceConsumer;
-import kukaWii.wiiHandle.PersistenceProvider;
-import kukaWii.wiiHandle.Packet.Filter.FileReader;
-import kukaWii.wiiHandle.Packet.Filter.MovingAverageFilter;
-import kukaWii.wiiHandle.Packet.Filter.NearestNeighbourFilter;
+import kukaWii.wiiHandle.Consumer.DummyConsumer;
+import kukaWii.wiiHandle.Consumer.PersistenceConsumer;
+import kukaWii.wiiHandle.Filter.MovingAverageFilter;
+import kukaWii.wiiHandle.Filter.NearestNeighbourFilter;
+import kukaWii.wiiHandle.Internal.Connection;
+import kukaWii.wiiHandle.Provider.PersistenceProvider;
 
-public class MainWOWii extends AbstractMain {
+public class MainWOWii{
 	
 	public static void main(String[] args){
-		singleton = new MainWOWii();
+		new MainWOWii();
 	}
 	
 	private MainWOWii(){
-		setSimulation(true);
+		System.setProperty("Simulation", "true");
 		PersistenceProvider provider = new PersistenceProvider();
 		//Hier können dem Provider mit addConsumer ebensolche hinzugefügt werden
-		provider.start();
 		
 		System.setProperty("InterruptCheck", "100");
 		
 		MovingAverageFilter movingAverageFilter = new MovingAverageFilter();
 		NearestNeighbourFilter nearestNeighbourFilter = new NearestNeighbourFilter();
-		FileReader fileReader = new FileReader();
-		PersistenceConsumer consumer = new PersistenceConsumer();
+		DummyConsumer consumer = new DummyConsumer();
 		
-		provider.addFilter(fileReader);
-		provider.addFilter(movingAverageFilter);
-		provider.addFilter(nearestNeighbourFilter);
+		//provider.addFilter(movingAverageFilter);
+		provider.addConsumer(nearestNeighbourFilter);
 		provider.addConsumer(consumer);
+		provider.start();
 	}
 }

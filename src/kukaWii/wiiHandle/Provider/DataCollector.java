@@ -1,8 +1,7 @@
-package kukaWii.wiiHandle;
+package kukaWii.wiiHandle.Provider;
 
-import kukaWii.wiiHandle.Packet.Base.AccelerometerPacket;
-import kukaWii.wiiHandle.Packet.Base.MotionPlusPacket;
-import kukaWii.wiiHandle.Packet.Handle.AbstractPacketProvider;
+import kukaWii.wiiHandle.Packet.AccelerometerPacket;
+import kukaWii.wiiHandle.Packet.MotionPlusPacket;
 import motej.Extension;
 import motej.Mote;
 import motej.event.AccelerometerEvent;

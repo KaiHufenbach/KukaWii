@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Packet.Filter;
+package kukaWii.wiiHandle.Filter;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
-import kukaWii.wiiHandle.Packet.Base.AccelerometerPacket;
-import kukaWii.wiiHandle.Packet.Base.MotionPlusPacket;
+import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.Packet.AccelerometerPacket;
+import kukaWii.wiiHandle.Packet.MotionPlusPacket;
 
 /*
  * Diese Klasse schmeißt stark abweichende Werte, oder Störungen aus dem Wertestrom und puffert nach.

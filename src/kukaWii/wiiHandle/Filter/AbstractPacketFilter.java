@@ -1,12 +1,12 @@
-package kukaWii.wiiHandle.Packet.Filter;
+package kukaWii.wiiHandle.Filter;
 
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
-import kukaWii.wiiHandle.Packet.Handle.AbstractPacketProvider;
-import kukaWii.wiiHandle.Packet.Handle.PacketConsumer;
+import kukaWii.wiiHandle.Consumer.IPacketConsumer;
+import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.Provider.AbstractPacketProvider;
 
-public abstract class AbstractPacketFilter extends AbstractPacketProvider implements PacketConsumer{
+public abstract class AbstractPacketFilter extends AbstractPacketProvider implements IPacketConsumer{
 	
 	private BlockingQueue<AbstractPacket> input;
 	private boolean run = true;

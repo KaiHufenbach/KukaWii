@@ -1,8 +1,8 @@
-package kukaWii.wiiHandle.Packet.Handle;
+package kukaWii.wiiHandle.Consumer;
 
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
+import kukaWii.wiiHandle.Packet.AbstractPacket;
 
 /**
  * Basis-Interface für Consumer.
@@ -10,7 +10,7 @@ import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
  * @author InternetMini
  *
  */
-public interface PacketConsumer {
+public interface IPacketConsumer {
 	/**
 	 * Registriert eine Queue bei dem Consumer.
 	 * Diesem ist selbst überlassen, was er damit tut

@@ -1,12 +1,13 @@
-package kukaWii.wiiHandle.Packet.Handle;
+package kukaWii.wiiHandle.Provider;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import kukaWii.wiiHandle.Packet.Base.AbstractPacket;
-import kukaWii.wiiHandle.Packet.Filter.AbstractPacketFilter;
+import kukaWii.wiiHandle.Consumer.IPacketConsumer;
+import kukaWii.wiiHandle.Filter.AbstractPacketFilter;
+import kukaWii.wiiHandle.Packet.AbstractPacket;
 /**
  * Abstrakte Klasse, um WiiPakete anzubieten.
  * Dazu muss die Methode providePacket genutzt werden.
@@ -17,9 +18,8 @@ public abstract class AbstractPacketProvider {
 
 	private BlockingQueue<AbstractPacket> out = new ArrayBlockingQueue<AbstractPacket>(10000, true);
 	private Lock providerLock = new ReentrantLock(true);
-	private PacketConsumer consumer = null;
-	private PacketConsumer lastConsumer = null;
-	private AbstractPacketFilter filter = null;
+	private IPacketConsumer consumer = null;
+	private IPacketConsumer lastConsumer = null;
 	private boolean interrupt = false;
 	
 	/**
@@ -48,7 +48,7 @@ public abstract class AbstractPacketProvider {
 	 * 	- 1 Consumer
 	 * @param consumer
 	 */
-	public void addConsumer(PacketConsumer consumer){
+	public void addConsumer(IPacketConsumer consumer){
 		lastConsumer = consumer;
 		if(this.consumer != null){
 			((AbstractPacketProvider)this.consumer).addConsumer(consumer);
@@ -57,15 +57,6 @@ public abstract class AbstractPacketProvider {
 			this.consumer.registerQueue(out);
 			this.consumer.start();
 		}
-	}
-	
-	/**
-	 * 
-	 */
-	public void addFilter(AbstractPacketFilter filter){
-		this.filter = filter;
-		this.filter.registerQueue(out);
-		this.filter.start();
 	}
 	
 	/**
