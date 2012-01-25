@@ -5,32 +5,32 @@ import java.util.concurrent.BlockingQueue;
 import kukaWii.wiiHandle.Packet.AbstractPacket;
 
 /**
- * Basis-Interface fŸr Consumer.
- * Diese mŸssen eine InputQueue registrieren kšnnen.
+ * Basis-Interface fï¿½r Consumer.
+ * Diese mï¿½ssen eine InputQueue registrieren kï¿½nnen.
  * @author InternetMini
  *
  */
 public interface IPacketConsumer {
 	/**
 	 * Registriert eine Queue bei dem Consumer.
-	 * Diesem ist selbst Ÿberlassen, was er damit tut
+	 * Diesem ist selbst ï¿½berlassen, was er damit tut
 	 * @param queue
 	 */
 	public void registerQueue(BlockingQueue<AbstractPacket> inputQueue);
 	
 	
 	/**
-	 * LŠsst einen Consumer starten.
+	 * LÃ¤sst einen Consumer starten.
 	 */
 	public void start();
 	
 	/**
-	 * LŠsst einen Consumer anhalten.
+	 * LÃ¤sst einen Consumer anhalten.
 	 */
 	public void stop();
 	
 	/**
-	 * †berprŸft die Antwortzeit.
+	 * ÃœberprÃ¼ft die Antwortzeit.
 	 */
 	public void checkAntwortzeit(AbstractPacket packet);
 }

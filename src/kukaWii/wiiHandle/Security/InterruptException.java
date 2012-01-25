@@ -7,7 +7,7 @@ package kukaWii.wiiHandle.Security;
  * @author Kai
  *
  */
-public class InterruptException extends RuntimeException{
+class InterruptException extends RuntimeException{
 	/**
 	 * 
 	 */
@@ -15,9 +15,5 @@ public class InterruptException extends RuntimeException{
 
 	public InterruptException(String reason){
 		super(reason);
-		if (System.getProperty("Simulation").equals("false")){
-			//SecurityService Zugriff...
-			SecurityService.getInstance().getDataCollector().panicInterrupt();
-		}
 	}
 }

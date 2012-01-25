@@ -3,10 +3,10 @@ package kukaWii.wiiHandle.Consumer;
 import java.util.concurrent.BlockingQueue;
 
 import kukaWii.wiiHandle.Packet.AbstractPacket;
-import kukaWii.wiiHandle.Security.InterruptException;
+import kukaWii.wiiHandle.Security.SecurityService;
 
 /**
- * Abstrakte Basisimplementation fŸr einen PacketConsumer.
+ * Abstrakte Basisimplementation fÅ¸r einen PacketConsumer.
  * 
  * @author Kai
  * 
@@ -69,7 +69,7 @@ public abstract class AbstractPacketConsumer implements IPacketConsumer {
 					- packet.getTimestamp();
 			if (System.getProperty("Simulation").equals("false")) {
 				if (difference > differenceCheck) {
-					throw new InterruptException("Zu lange Antwortzeit: "
+					SecurityService.panicInterrupt("Zu lange Antwortzeit: "
 							+ difference + "ms");
 				}
 			}
