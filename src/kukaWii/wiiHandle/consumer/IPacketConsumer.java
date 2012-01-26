@@ -1,8 +1,8 @@
-package kukaWii.wiiHandle.Consumer;
+package kukaWii.wiiHandle.consumer;
 
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.packet.AbstractPacket;
 
 /**
  * Basis-Interface f�r Consumer.

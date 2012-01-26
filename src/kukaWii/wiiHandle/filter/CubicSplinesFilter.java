@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Filter;
+package kukaWii.wiiHandle.filter;
 
 public class CubicSplinesFilter {
 

@@ -3,7 +3,7 @@ package kukaWii.movement;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Security.SecurityService;
+import kukaWii.wiiHandle.security.SecurityService;
 
 /**
  * Hilfsklasse, in der Bewegungsbefehle ({@link MoveAction}) gesammelt werden können.

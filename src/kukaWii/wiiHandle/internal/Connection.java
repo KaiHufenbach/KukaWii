@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Internal;
+package kukaWii.wiiHandle.internal;
 
 import motej.Mote;
 import motej.MoteFinder;
@@ -7,7 +7,7 @@ import motej.event.MoteDisconnectedEvent;
 import motej.event.MoteDisconnectedListener;
 
 /**
- * Verwaltet eine Verbindung zu einer WiiMote. Rei§t die Verbindung ab, so wird automatisch <code>mote = null</code> gesetzt.
+ * Verwaltet eine Verbindung zu einer WiiMote. Reiï¿½t die Verbindung ab, so wird automatisch <code>mote = null</code> gesetzt.
  * Dazu ist ggf. ein Listener auf der Mote im Programm anzumelden.
  * @author Kai Hufenbach
  *
@@ -66,7 +66,7 @@ public class Connection {
 	}
 	
 	/**
-	 * Gibt Wii-Remote Objekt zurŸck. Sucht, wenn nštig nach einer neuen Wii-Remote.
+	 * Gibt Wii-Remote Objekt zurï¿½ck. Sucht, wenn nï¿½tig nach einer neuen Wii-Remote.
 	 * @return Die Wii-Remote
 	 */
 	public Mote getRemote(){

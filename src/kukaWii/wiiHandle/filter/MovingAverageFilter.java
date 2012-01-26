@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Filter;
+package kukaWii.wiiHandle.filter;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Packet.AbstractPacket;
-import kukaWii.wiiHandle.Packet.AccelerometerPacket;
-import kukaWii.wiiHandle.Packet.MotionPlusPacket;
+import kukaWii.wiiHandle.packet.AbstractPacket;
+import kukaWii.wiiHandle.packet.AccelerometerPacket;
+import kukaWii.wiiHandle.packet.MotionPlusPacket;
 
 /*
- * Diese Klasse schmeißt stark abweichende Werte, oder Störungen aus dem Wertestrom und puffert nach.
+ * Diese Klasse schmeiï¿½t stark abweichende Werte, oder Stï¿½rungen aus dem Wertestrom und puffert nach.
  */
 
 public class MovingAverageFilter extends AbstractPacketFilter {

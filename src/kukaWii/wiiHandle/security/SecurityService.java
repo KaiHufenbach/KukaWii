@@ -1,6 +1,6 @@
-package kukaWii.wiiHandle.Security;
+package kukaWii.wiiHandle.security;
 
-import kukaWii.wiiHandle.Provider.DataCollector;
+import kukaWii.wiiHandle.provider.DataCollector;
 
 public class SecurityService {
 	

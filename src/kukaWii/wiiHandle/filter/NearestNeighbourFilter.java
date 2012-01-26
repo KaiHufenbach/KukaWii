@@ -1,6 +1,6 @@
-package kukaWii.wiiHandle.Filter;
+package kukaWii.wiiHandle.filter;
 
-import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.packet.AbstractPacket;
 
 public class NearestNeighbourFilter extends AbstractPacketFilter {
 

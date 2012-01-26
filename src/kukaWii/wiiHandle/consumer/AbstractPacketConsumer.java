@@ -1,9 +1,9 @@
-package kukaWii.wiiHandle.Consumer;
+package kukaWii.wiiHandle.consumer;
 
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Packet.AbstractPacket;
-import kukaWii.wiiHandle.Security.SecurityService;
+import kukaWii.wiiHandle.packet.AbstractPacket;
+import kukaWii.wiiHandle.security.SecurityService;
 
 /**
  * Abstrakte Basisimplementation fŸr einen PacketConsumer.

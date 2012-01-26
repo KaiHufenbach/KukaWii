@@ -1,11 +1,11 @@
 package kukaWii.main;
 
-import kukaWii.wiiHandle.Consumer.DummyConsumer;
-import kukaWii.wiiHandle.Consumer.PersistenceConsumer;
-import kukaWii.wiiHandle.Filter.MovingAverageFilter;
-import kukaWii.wiiHandle.Filter.NearestNeighbourFilter;
-import kukaWii.wiiHandle.Internal.Connection;
-import kukaWii.wiiHandle.Provider.PersistenceProvider;
+import kukaWii.wiiHandle.consumer.DummyConsumer;
+import kukaWii.wiiHandle.consumer.PersistenceConsumer;
+import kukaWii.wiiHandle.filter.MovingAverageFilter;
+import kukaWii.wiiHandle.filter.NearestNeighbourFilter;
+import kukaWii.wiiHandle.internal.Connection;
+import kukaWii.wiiHandle.provider.PersistenceProvider;
 
 public class MainWOWii{
 	
@@ -16,7 +16,7 @@ public class MainWOWii{
 	private MainWOWii(){
 		System.setProperty("Simulation", "true");
 		PersistenceProvider provider = new PersistenceProvider();
-		//Hier kšnnen dem Provider mit addConsumer ebensolche hinzugefŸgt werden
+		//Hier kï¿½nnen dem Provider mit addConsumer ebensolche hinzugefï¿½gt werden
 		
 		System.setProperty("InterruptCheck", "100");
 		

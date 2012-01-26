@@ -1,9 +1,9 @@
 package kukaWii.main;
 
-import kukaWii.wiiHandle.Consumer.PersistenceConsumer;
-import kukaWii.wiiHandle.Internal.Connection;
-import kukaWii.wiiHandle.Provider.DataCollector;
-import kukaWii.wiiHandle.Security.SecurityService;
+import kukaWii.wiiHandle.consumer.PersistenceConsumer;
+import kukaWii.wiiHandle.internal.Connection;
+import kukaWii.wiiHandle.provider.DataCollector;
+import kukaWii.wiiHandle.security.SecurityService;
 import motej.Mote;
 
 /**
@@ -17,7 +17,7 @@ public class Main {
 	private DataCollector collector;
 	
 	
-	//Aus SicherheitsgrŸnden
+	//Aus Sicherheitsgrï¿½nden
 	
 	public static void main(String[] args){
 		new Main();

@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Security;
+package kukaWii.wiiHandle.security;
 
 
 /**

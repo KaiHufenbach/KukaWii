@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Packet;
+package kukaWii.wiiHandle.packet;
 
 
 public class MotionPlusPacket extends AbstractPacket{

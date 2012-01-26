@@ -1,5 +1,5 @@
 
-package kukaWii.wiiHandle.Provider;
+package kukaWii.wiiHandle.provider;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
-import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.packet.AbstractPacket;
 
 public class PersistenceProvider extends AbstractPacketProvider{
 
@@ -32,7 +32,7 @@ public class PersistenceProvider extends AbstractPacketProvider{
 	}
 	
 	/**
-	 * Muss aktiviert werden, damit der Provider anfŠngt.
+	 * Muss aktiviert werden, damit der Provider anfï¿½ngt.
 	 */
 	public void start(){
 		

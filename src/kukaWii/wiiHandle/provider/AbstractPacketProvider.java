@@ -1,13 +1,13 @@
-package kukaWii.wiiHandle.Provider;
+package kukaWii.wiiHandle.provider;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import kukaWii.wiiHandle.Consumer.IPacketConsumer;
-import kukaWii.wiiHandle.Filter.AbstractPacketFilter;
-import kukaWii.wiiHandle.Packet.AbstractPacket;
+import kukaWii.wiiHandle.consumer.IPacketConsumer;
+import kukaWii.wiiHandle.filter.AbstractPacketFilter;
+import kukaWii.wiiHandle.packet.AbstractPacket;
 /**
  * Abstrakte Klasse, um WiiPakete anzubieten.
  * Dazu muss die Methode providePacket genutzt werden.
@@ -29,7 +29,7 @@ public abstract class AbstractPacketProvider {
 	protected void providePacket(AbstractPacket packet){
 		providerLock.lock();
 		try{
-			//Ermšglicht eine Zirkulation der Pakete, wenn kein Verbrauch stattfindet.
+			//Ermï¿½glicht eine Zirkulation der Pakete, wenn kein Verbrauch stattfindet.
 			if(!interrupt){
 				if(!out.offer(packet)){
 					out.poll();
@@ -42,8 +42,8 @@ public abstract class AbstractPacketProvider {
 	}
 	
 	/**
-	 * FŸgt ans Ende der Kette einen Consumer an.
-	 * In folgender Reihenfolge kšnnen hinzugefŸgt werden:
+	 * Fï¿½gt ans Ende der Kette einen Consumer an.
+	 * In folgender Reihenfolge kï¿½nnen hinzugefï¿½gt werden:
 	 * 	- n Filter
 	 * 	- 1 Consumer
 	 * @param consumer
@@ -68,7 +68,7 @@ public abstract class AbstractPacketProvider {
 	}
 	
 	/**
-	 * Zum temporŠren unterbrechen des Paketstromes.
+	 * Zum temporï¿½ren unterbrechen des Paketstromes.
 	 * Alle Pakete werden ab hier gedropt.
 	 */
 	public void interrupt(){

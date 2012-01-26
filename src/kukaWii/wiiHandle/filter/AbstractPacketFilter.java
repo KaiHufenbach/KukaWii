@@ -1,10 +1,10 @@
-package kukaWii.wiiHandle.Filter;
+package kukaWii.wiiHandle.filter;
 
 import java.util.concurrent.BlockingQueue;
 
-import kukaWii.wiiHandle.Consumer.IPacketConsumer;
-import kukaWii.wiiHandle.Packet.AbstractPacket;
-import kukaWii.wiiHandle.Provider.AbstractPacketProvider;
+import kukaWii.wiiHandle.consumer.IPacketConsumer;
+import kukaWii.wiiHandle.packet.AbstractPacket;
+import kukaWii.wiiHandle.provider.AbstractPacketProvider;
 
 public abstract class AbstractPacketFilter extends AbstractPacketProvider implements IPacketConsumer{
 	
@@ -17,7 +17,7 @@ public abstract class AbstractPacketFilter extends AbstractPacketProvider implem
 	}
 	
 	/**
-	 * Diese Methode wird vom Filter aufgerufen, um ein Paket zu verŠndern.
+	 * Diese Methode wird vom Filter aufgerufen, um ein Paket zu verï¿½ndern.
 	 * @param input
 	 * @return AbstractPacket, wenn null, dann wird dieses nicht in die outputQueueAufgenommen
 	 */

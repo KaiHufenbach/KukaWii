@@ -1,7 +1,7 @@
-package kukaWii.wiiHandle.Provider;
+package kukaWii.wiiHandle.provider;
 
-import kukaWii.wiiHandle.Packet.AccelerometerPacket;
-import kukaWii.wiiHandle.Packet.MotionPlusPacket;
+import kukaWii.wiiHandle.packet.AccelerometerPacket;
+import kukaWii.wiiHandle.packet.MotionPlusPacket;
 import motej.Extension;
 import motej.Mote;
 import motej.event.AccelerometerEvent;
@@ -19,7 +19,7 @@ public class DataCollector extends AbstractPacketProvider implements MotionPlusL
 	private final DataCollector instance = this;
 	
 	/**
-	 * Initialisiert einen neuen DataCollector fŸr eine Wii-Mote.
+	 * Initialisiert einen neuen DataCollector fï¿½r eine Wii-Mote.
 	 * Nimmt Signale der MotionPlus und der Accelerometer entgegen 
 	 * @param mote
 	 */

@@ -1,4 +1,4 @@
-package kukaWii.wiiHandle.Packet;
+package kukaWii.wiiHandle.packet;
 
 public class AccelerometerPacket extends AbstractPacket{
 	

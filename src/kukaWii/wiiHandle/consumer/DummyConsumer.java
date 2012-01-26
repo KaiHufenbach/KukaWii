@@ -1,11 +1,11 @@
-package kukaWii.wiiHandle.Consumer;
+package kukaWii.wiiHandle.consumer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import kukaWii.wiiHandle.Packet.AbstractPacket;
-import kukaWii.wiiHandle.Packet.AccelerometerPacket;
-import kukaWii.wiiHandle.Packet.MotionPlusPacket;
+import kukaWii.wiiHandle.packet.AbstractPacket;
+import kukaWii.wiiHandle.packet.AccelerometerPacket;
+import kukaWii.wiiHandle.packet.MotionPlusPacket;
 
 public class DummyConsumer extends AbstractPacketConsumer {
 	
