@@ -1,53 +1,53 @@
 package kukaWii.movement;
 
 public class MoveAction {
-	
-	private float x;
-	private float y;
-	private float z;
-	private float speed;
-	
+
+	private double x;
+	private double y;
+	private double z;
+	private double speed;
+
 	/**
-	 * Erzeugt eine neue Bewegungsanweisung. Diese wird durch einen Vektor dargestellt.
+	 * Erzeugt eine neue Bewegungsanweisung. Diese wird durch einen Vektor
+	 * dargestellt.
+	 * 
 	 * @param x
 	 * @param y
 	 * @param z
 	 * @param speed
 	 */
-	public MoveAction(float x, float y, float z, float speed){
+	public MoveAction(double x, double y, double z, double speed) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.speed = speed;
 	}
-	
-	public float getX() {
+
+	public double getX() {
 		return x;
 	}
-	
-	public void setX(float x){
+
+	public void setX(double x) {
 		this.x = x;
 	}
-	
-	public float getY() {
+
+	public double getY() {
 		return y;
 	}
-	
-	
-	
-	public void setY(float y) {
+
+	public void setY(double y) {
 		this.y = y;
 	}
 
-	public void setZ(float z) {
+	public void setZ(double z) {
 		this.z = z;
 	}
 
-	public float getZ() {
+	public double getZ() {
 		return z;
 	}
-	
-	public float getSpeed() {
+
+	public double getSpeed() {
 		return speed;
 	}
 }

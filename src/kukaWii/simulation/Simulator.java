@@ -155,7 +155,7 @@ public class Simulator {
 				}
 
 				if (remainingMove != null) {
-					float moveDistance = (timeDifference + remainingTimeDifference)
+					double moveDistance = (timeDifference + remainingTimeDifference)
 							* remainingMove.getSpeed() / 1000;
 
 					float remainingDistance = (float) Math.sqrt((remainingMove
@@ -163,12 +163,12 @@ public class Simulator {
 							+ (remainingMove.getY() * remainingMove.getY())
 							+ (remainingMove.getZ() * remainingMove.getZ()));
 
-					float proportion = moveDistance / remainingDistance;
+					double proportion = moveDistance / remainingDistance;
 
 					if (proportion < 1) {
-						float partX = proportion * remainingMove.getX();
-						float partY = proportion * remainingMove.getY();
-						float partZ = proportion * remainingMove.getZ();
+						double partX = proportion * remainingMove.getX();
+						double partY = proportion * remainingMove.getY();
+						double partZ = proportion * remainingMove.getZ();
 
 						x += partX;
 						y += partY;
@@ -185,7 +185,7 @@ public class Simulator {
 						z += remainingMove.getZ();
 
 						remainingTimeDifference = timeDifference
-								- (timeDifference / proportion);
+								- (timeDifference / (float) proportion);
 
 						remainingMove = null;
 
