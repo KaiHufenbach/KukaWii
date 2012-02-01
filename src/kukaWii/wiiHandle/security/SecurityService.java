@@ -1,5 +1,7 @@
 package kukaWii.wiiHandle.security;
 
+
+
 import kukaWii.wiiHandle.provider.DataCollector;
 
 public class SecurityService {

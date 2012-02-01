@@ -2,6 +2,8 @@ package kukaWii.simulation;
 
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -13,6 +15,7 @@ import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.media.opengl.glu.GLUquadric;
+import javax.xml.ws.Holder;
 
 import kukaWii.movement.MoveAction;
 import kukaWii.movement.MovementService;
@@ -29,7 +32,12 @@ import com.sun.opengl.util.j2d.TextRenderer;
  * 
  */
 public class Simulator {
-
+	
+	private final float[] x = new float[1];
+	private final float[] y = new float[1];
+	private final float[] z = new float[1];
+	
+	
 	/**
 	 * Erzeugt eine neue Simulator Klasse. Dabei wird ein JOGL Fenster mit einer
 	 * Roten Kugel geöffnet, die mit einer bestimmten Geschwindigkeit relativ
@@ -38,9 +46,13 @@ public class Simulator {
 	public Simulator() {
 		GLCapabilities caps = new GLCapabilities();
 		final GLCanvas canvas = new GLCanvas(caps);
-		Frame frame = new Frame("Movement Simulator");
+		final Frame frame = new Frame("Movement Simulator");
 		frame.add(canvas);
 		frame.setSize(800, 800);
+		
+		x[0] = 0;
+		y[0] = 0;
+		z[0] = 0;
 
 		frame.addWindowListener(new WindowAdapter() {
 
@@ -50,25 +62,39 @@ public class Simulator {
 			}
 
 		});
+		
+		frame.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				if(evt.getKeyChar() == ' '){
+					reset();
+				}
+			}
+			
+		});
 
 		canvas.addGLEventListener(new GLEventListener() {
-
+			
+			
+			
 			Animator animator;
 			GLU glu;
 
 			TextRenderer textRenderer;
 
-			float x = 0;
-			float y = 0;
-			float z = 0;
+			
 
 			int framecount = 0;
-			long time = System.currentTimeMillis();
+			
 			long fps = 0;
 
 			MoveAction remainingMove = null;
 
 			long timeDifference;
+			long tsBefore = System.currentTimeMillis();
+			long timeToSecond = 0;
+			
 			float remainingTimeDifference = 0;
 
 			MovementService movementService = MovementService.getService();
@@ -141,60 +167,73 @@ public class Simulator {
 
 				setCamera(gl, glu, 1000);
 
-				// Das eigentliche Objekt und die dazugehörige Bewegung
 				gl.glPushMatrix();
-
-				// Zeitdifferenz wird hier berechnet
+				gl.glLoadIdentity();
+				
+				// Zeitdifferenz zwischen dem letzten Mal neuzeichnen wird hier berechnet
 				calculateFPS();
 
-				// Die Geschwindigkeit gibt an, wieviele Einheiten sich pro
-				// Sekunde bewegt werden soll
-
+			
+				//Wenn keine Bewegung mehr abzuarbeiten ist, dann eine neue holen
 				if (remainingMove == null) {
 					remainingMove = movementService.getNextMoveAction();
 				}
 
+				//Es ist noch eine Bewegung abzuarbeiten
 				if (remainingMove != null) {
+					
+					//Um wieviel kann ich mich bewegen? (Zeit zwischen Neuzeichnen und verbleibender vorherigen Bewegung)
 					double moveDistance = (timeDifference + remainingTimeDifference)
-							* remainingMove.getSpeed() / 1000;
+							* remainingMove.getSpeed();
+					remainingTimeDifference = 0;
 
+					//Wieweit muss ich mich eigentlich für das Paket insgesamt bewegen?
 					float remainingDistance = (float) Math.sqrt((remainingMove
 							.getX() * remainingMove.getX())
 							+ (remainingMove.getY() * remainingMove.getY())
 							+ (remainingMove.getZ() * remainingMove.getZ()));
 
+					
 					double proportion = moveDistance / remainingDistance;
 
+					//Die Bewegung kann nicht vollständig abgearbeitet werden
 					if (proportion < 1) {
+						//Partielle Anteile berechnen
 						double partX = proportion * remainingMove.getX();
 						double partY = proportion * remainingMove.getY();
 						double partZ = proportion * remainingMove.getZ();
 
-						x += partX;
-						y += partY;
-						z += partZ;
+						//Position verändern
+						x[0] += partX;
+						y[0] += partY;
+						z[0] += partZ;
 
+						//Verbleibende Bewegung berechnen
 						remainingMove.setX(remainingMove.getX() - partX);
 						remainingMove.setY(remainingMove.getY() - partY);
 						remainingMove.setZ(remainingMove.getZ() - partZ);
+						
+					}
+					//Die Bewegung kann vollständig abgearbeitet werden
+					else {
 
-					} else {
+						//Position verändern
+						x[0] += remainingMove.getX();
+						y[0] += remainingMove.getY();
+						z[0] += remainingMove.getZ();
 
-						x += remainingMove.getX();
-						y += remainingMove.getY();
-						z += remainingMove.getZ();
-
-						remainingTimeDifference = timeDifference
-								- (timeDifference / (float) proportion);
+						//Es stand für die Bewegung ja mehr Zeit zur Verfügung, den Rest für das nächste mal merken
+						if(proportion != 1){
+							remainingTimeDifference = timeDifference - (float)((1/proportion)*timeDifference);
+						}
+						
 
 						remainingMove = null;
 
 					}
 
-					gl.glTranslatef(x, y, z);
+					gl.glTranslatef(x[0], y[0], z[0]);
 				}
-
-				remainingTimeDifference = 0;
 
 				GLUquadric ball = glu.gluNewQuadric();
 				glu.gluQuadricDrawStyle(ball, GLU.GLU_FILL);
@@ -212,11 +251,11 @@ public class Simulator {
 				textRenderer.beginRendering(drawable.getWidth(),
 						drawable.getHeight());
 				textRenderer.setColor(1.0f, 1.0f, 1.0f, 0.7f);
-				textRenderer.draw("X: " + x, drawable.getWidth() - 80,
+				textRenderer.draw("X: " + x[0], drawable.getWidth() - 80,
 						drawable.getHeight() - 20);
-				textRenderer.draw("Y: " + y, drawable.getWidth() - 80,
+				textRenderer.draw("Y: " + y[0], drawable.getWidth() - 80,
 						drawable.getHeight() - 45);
-				textRenderer.draw("Z: " + z, drawable.getWidth() - 80,
+				textRenderer.draw("Z: " + z[0], drawable.getWidth() - 80,
 						drawable.getHeight() - 70);
 				textRenderer.draw("FPS: " + fps, drawable.getWidth() - 80,
 						drawable.getHeight() - 95);
@@ -240,18 +279,28 @@ public class Simulator {
 				framecount++;
 
 				long ts = System.currentTimeMillis();
-				timeDifference = ts - time;
+				timeDifference = ts - tsBefore;
+				tsBefore = ts;
+				
+				timeToSecond += timeDifference;
 
-				if (timeDifference > 1000) {
-					time = ts;
-					fps = framecount / (timeDifference / 1000);
+				if (timeToSecond > 1000) {
+					fps = framecount / (timeToSecond / 1000);
 
 					framecount = 0;
+					timeToSecond = 0;
 				}
 			}
 		});
 
 		frame.setVisible(true);
+	}
+	
+	private void reset(){
+		x[0] = 0;
+		y[0] = 0;
+		z[0] = 0;
+		
 	}
 
 	public static void main(String[] args) {

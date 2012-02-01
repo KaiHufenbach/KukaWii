@@ -1,5 +1,11 @@
 package kukaWii.movement;
 
+/**
+ * Stellt ein Bewegungspaket dar, in dem ein Ziel in Koordinaten, sowie eine Geschwindigkeit hinterlegt wird.
+ * 
+ * @author Kai
+ *
+ */
 public class MoveAction {
 
 	private double x;

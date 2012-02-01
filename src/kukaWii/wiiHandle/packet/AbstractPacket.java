@@ -9,7 +9,7 @@ public abstract class AbstractPacket implements Comparable<AbstractPacket>, Seri
 	private long ts;
 	
 	public AbstractPacket(){
-		ts = System.currentTimeMillis();
+		ts = System.nanoTime();
 	}
 	
 	public long getTimestamp(){

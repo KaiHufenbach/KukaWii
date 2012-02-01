@@ -44,7 +44,9 @@ public class PersistenceProvider extends AbstractPacketProvider {
 			public void run() {
 				for (AbstractPacket packet : packets) {
 					try {
-						Thread.sleep(packet.getTimestamp() - time);
+						long nanoDifference = packet.getTimestamp() - time;
+						
+						Thread.sleep(nanoDifference/1000, (int)(nanoDifference % 1000));
 						providePacket(packet);
 						time = packet.getTimestamp();
 					} catch (InterruptedException e) {

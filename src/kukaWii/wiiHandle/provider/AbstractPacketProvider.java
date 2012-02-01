@@ -29,7 +29,7 @@ public abstract class AbstractPacketProvider {
 	protected void providePacket(AbstractPacket packet){
 		providerLock.lock();
 		try{
-			//Erm�glicht eine Zirkulation der Pakete, wenn kein Verbrauch stattfindet.
+			//Ermöglicht eine Zirkulation der Pakete, wenn kein Verbrauch stattfindet.
 			if(!interrupt){
 				if(!out.offer(packet)){
 					out.poll();
@@ -42,8 +42,8 @@ public abstract class AbstractPacketProvider {
 	}
 	
 	/**
-	 * F�gt ans Ende der Kette einen Consumer an.
-	 * In folgender Reihenfolge k�nnen hinzugef�gt werden:
+	 * Fügt ans Ende der Kette einen Consumer an.
+	 * In folgender Reihenfolge können hinzugefügt werden:
 	 * 	- n Filter
 	 * 	- 1 Consumer
 	 * @param consumer
@@ -68,7 +68,7 @@ public abstract class AbstractPacketProvider {
 	}
 	
 	/**
-	 * Zum tempor�ren unterbrechen des Paketstromes.
+	 * Zum temporären unterbrechen des Paketstromes.
 	 * Alle Pakete werden ab hier gedropt.
 	 */
 	public void interrupt(){

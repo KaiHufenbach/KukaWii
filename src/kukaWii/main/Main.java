@@ -1,6 +1,8 @@
 package kukaWii.main;
 
+import kukaWii.simulation.Simulator;
 import kukaWii.wiiHandle.consumer.PersistenceConsumer;
+import kukaWii.wiiHandle.consumer.SimulationConsumer;
 import kukaWii.wiiHandle.internal.Connection;
 import kukaWii.wiiHandle.provider.DataCollector;
 import kukaWii.wiiHandle.security.SecurityService;
@@ -17,7 +19,7 @@ public class Main {
 	private DataCollector collector;
 	
 	
-	//Aus Sicherheitsgr�nden
+	//Aus Sicherheitsgründen
 	
 	public static void main(String[] args){
 		new Main();
@@ -25,13 +27,14 @@ public class Main {
 	
 	
 	private Main(){
-		System.setProperty("InterruptCheck", "100");
+		System.setProperty("InterruptCheck", "10000");
 		System.setProperty("Simulation", "false");
 		connection = new Connection();
 		Mote mote = connection.getRemote();
 		collector = new DataCollector(mote);
 		SecurityService.createSecurityService(collector);
-		collector.addConsumer(new PersistenceConsumer());
+		collector.addConsumer(new SimulationConsumer());
+		//collector.addConsumer(new PersistenceConsumer());
 	}
 
 	public Connection getConnection(){

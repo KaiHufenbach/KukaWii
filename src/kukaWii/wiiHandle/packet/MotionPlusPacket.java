@@ -47,6 +47,30 @@ public class MotionPlusPacket extends AbstractPacket{
 	public double getYawLeftSpeed() {
 		return yawLeftSpeed;
 	}
+
+	public void setPitch(double pitch) {
+		this.pitch = pitch;
+	}
+
+	public void setPitchDownSpeed(double pitchDownSpeed) {
+		this.pitchDownSpeed = pitchDownSpeed;
+	}
+
+	public void setRoll(double roll) {
+		this.roll = roll;
+	}
+
+	public void setRollLeftSpeed(double rollLeftSpeed) {
+		this.rollLeftSpeed = rollLeftSpeed;
+	}
+
+	public void setYaw(double yaw) {
+		this.yaw = yaw;
+	}
+
+	public void setYawLeftSpeed(double yawLeftSpeed) {
+		this.yawLeftSpeed = yawLeftSpeed;
+	}
 	
 	
 }

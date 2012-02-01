@@ -15,7 +15,7 @@ import kukaWii.wiiHandle.security.SecurityService;
 public class MovementService {
 	// Maximale Größe der Queue, wird diese überschrieben, passiert ein
 	// eingestelltes Verhalten.
-	private int bufferSize = 10;
+	private int bufferSize = 1000;
 
 	private int overflowAction = 2;
 	private int takeAction = 0;
@@ -78,6 +78,14 @@ public class MovementService {
 
 		// Sollte nicht passieren.
 		return null;
+	}
+	
+	/**
+	 * Gibt die Aktuelle anzahl der Elemente an, die im Buffer vorhanden sind.
+	 * @return
+	 */
+	public synchronized int getActualBuffer(){
+		return moveQueue.size() - moveQueue.remainingCapacity();
 	}
 
 	/**
