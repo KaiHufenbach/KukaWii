@@ -20,12 +20,12 @@ public class MainWOWii {
 		System.setProperty("InterruptCheck", "100");
 
 		MovingAverageFilter movingAverageFilter = new MovingAverageFilter();
-		NearestNeighbourFilter nearestNeighbourFilter = new NearestNeighbourFilter();
+		//NearestNeighbourFilter nearestNeighbourFilter = new NearestNeighbourFilter();
 		// DummyConsumer consumer = new DummyConsumer();
 		SimulationConsumer consumer = new SimulationConsumer();
 
-		// provider.addFilter(movingAverageFilter);
-		provider.addConsumer(nearestNeighbourFilter);
+//		provider.addConsumer(movingAverageFilter);
+//		provider.addConsumer(nearestNeighbourFilter);
 		provider.addConsumer(consumer);
 		provider.start();
 	}
