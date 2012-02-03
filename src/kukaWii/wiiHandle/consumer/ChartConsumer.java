@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -24,12 +26,20 @@ import org.jfree.data.time.TimeSeriesDataItem;
 
 import kukaWii.wiiHandle.packet.AbstractPacket;
 import kukaWii.wiiHandle.packet.AccelerometerPacket;
+import kukaWii.wiiHandle.packet.MotionPlusPacket;
 
 public class ChartConsumer extends AbstractPacketConsumer{
 
-	private TimeSeries xTimeSeries;
-	private TimeSeries yTimeSeries;
-	private TimeSeries zTimeSeries;
+	private TimeSeries xAccelSeries;
+	private TimeSeries yAccelSeries;
+	private TimeSeries zAccelSeries;
+	
+	private TimeSeries mPlusPitchSeries;
+	private TimeSeries mPlusPitchSpeedSeries;
+	private TimeSeries mPlusRollSeries;
+	private TimeSeries mPlusRollSpeedSeries;
+	private TimeSeries mPlusYawSeries;
+	private TimeSeries mPlusYawSpeedSeries;
 	
 	
 	private JFrame frame;
@@ -38,52 +48,31 @@ public class ChartConsumer extends AbstractPacketConsumer{
 		super();
 		
 		frame = new JFrame();
-		
-		GridLayout gridLayout = new GridLayout(2, 2);
-		
-		frame.setLayout(gridLayout);		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		XYPlot plotX = new XYPlot();
-		TimeSeriesCollection timeSeriesCollX = new TimeSeriesCollection();
-		plotX.setDataset(timeSeriesCollX);
-		xTimeSeries = new TimeSeries("Accel Werte X");
-		timeSeriesCollX.addSeries(xTimeSeries);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		JPanel accelPanel = new JPanel();
+		JPanel mpPanel = new JPanel();
 		
+		tabbedPane.addTab("Accelerometer", accelPanel);
+		tabbedPane.addTab("MotionPlus", mpPanel);
+		accelPanel.setLayout(new GridLayout(2,2));
+		mpPanel.setLayout(new GridLayout(2,3));
 		
-		JFreeChart chartX = ChartFactory.createTimeSeriesChart("Aufzeichnung der Wii Accel Werte X", "Zeitpunkt", "Wert", timeSeriesCollX, false, false, false);
-		final ChartPanel chartPanelX = new ChartPanel(chartX);
+		xAccelSeries = createChart(accelPanel, "Accelerometer X");
+		yAccelSeries = createChart(accelPanel, "Accelerometer Y");
+		zAccelSeries = createChart(accelPanel, "Accelerometer Z");
 		
+		mPlusPitchSeries = createChart(mpPanel, "Pitch");
+		mPlusRollSeries = createChart(mpPanel, "Roll");
+		mPlusYawSeries = createChart(mpPanel, "Yaw");
 		
-		XYPlot plotY = new XYPlot();
-		TimeSeriesCollection timeSeriesCollY = new TimeSeriesCollection();
-		plotY.setDataset(timeSeriesCollY);
-		yTimeSeries = new TimeSeries("Accel Werte Y");
-		timeSeriesCollY.addSeries(yTimeSeries);
+		mPlusPitchSpeedSeries = createChart(mpPanel, "Pitch Speed");
+		mPlusRollSpeedSeries = createChart(mpPanel, "Roll Speed");
+		mPlusYawSpeedSeries = createChart(mpPanel, "Yaw Speed");
 		
-		
-		JFreeChart chartY = ChartFactory.createTimeSeriesChart("Aufzeichnung der Wii Accel Werte Y", "Zeitpunkt", "Wert", timeSeriesCollY, false, false, false);
-		final ChartPanel chartPanelY = new ChartPanel(chartY);
-		
-		XYPlot plotZ = new XYPlot();
-		TimeSeriesCollection timeSeriesCollZ = new TimeSeriesCollection();
-		plotZ.setDataset(timeSeriesCollZ);
-		zTimeSeries = new TimeSeries("Accel Werte Z");
-		timeSeriesCollZ.addSeries(zTimeSeries);
-		
-		
-		JFreeChart chartZ = ChartFactory.createTimeSeriesChart("Aufzeichnung der Wii Accel Werte Z", "Zeitpunkt", "Wert", timeSeriesCollZ, false, false, false);
-		final ChartPanel chartPanelZ = new ChartPanel(chartZ);
-		
-		
-		
-		
-		
-		
-		frame.add(chartPanelX);
-		frame.add(chartPanelY);
-		frame.add(chartPanelZ);
+		frame.add(tabbedPane);
 		
 		frame.pack();
 		frame.setVisible(true);
@@ -94,13 +83,40 @@ public class ChartConsumer extends AbstractPacketConsumer{
 		
 		if(packet instanceof AccelerometerPacket){
 			AccelerometerPacket accelPacket = (AccelerometerPacket) packet;
-			xTimeSeries.addOrUpdate(new TimeSeriesDataItem(new Millisecond(new Date(accelPacket.getTimestampMillis())), accelPacket.getX()));
-			yTimeSeries.addOrUpdate(new TimeSeriesDataItem(new Millisecond(new Date(accelPacket.getTimestampMillis())), accelPacket.getY()));
-			zTimeSeries.addOrUpdate(new TimeSeriesDataItem(new Millisecond(new Date(accelPacket.getTimestampMillis())), accelPacket.getZ()));
+			addPacketToSeries(xAccelSeries, accelPacket, accelPacket.getX());
+			addPacketToSeries(yAccelSeries, accelPacket, accelPacket.getY());
+			addPacketToSeries(zAccelSeries, accelPacket, accelPacket.getZ());
+		}else if(packet instanceof MotionPlusPacket){
+			MotionPlusPacket motionPacket = (MotionPlusPacket) packet;
+			addPacketToSeries(mPlusPitchSeries, motionPacket, motionPacket.getPitch());
+			addPacketToSeries(mPlusPitchSpeedSeries, motionPacket, motionPacket.getPitchDownSpeed());
+			addPacketToSeries(mPlusRollSeries, motionPacket, motionPacket.getRoll());
+			addPacketToSeries(mPlusRollSpeedSeries, motionPacket, motionPacket.getRollLeftSpeed());
+			addPacketToSeries(mPlusYawSeries, motionPacket, motionPacket.getYaw());
+			addPacketToSeries(mPlusYawSpeedSeries, motionPacket, motionPacket.getYawLeftSpeed());
 		}
 		
 		
 		
+	}
+	
+	private void addPacketToSeries(TimeSeries series, AbstractPacket packet, double value){
+		series.addOrUpdate(new TimeSeriesDataItem(new Millisecond(new Date(packet.getTimestampMillis())), value));
+	}
+	
+	private TimeSeries createChart(JPanel panel, String heading){
+		XYPlot plot = new XYPlot();
+		TimeSeriesCollection timeSeriesColl = new TimeSeriesCollection();
+		plot.setDataset(timeSeriesColl);
+		TimeSeries timeSeries = new TimeSeries("Werte");
+		timeSeriesColl.addSeries(timeSeries);
+		
+		JFreeChart chart = ChartFactory.createTimeSeriesChart(heading, "Zeitpunkt", "Wert", timeSeriesColl, false, false, false);
+		ChartPanel chartPanel = new ChartPanel(chart);
+		
+		panel.add(chartPanel);
+		
+		return timeSeries;
 	}
 	
 	public static void main(String[] args) {
