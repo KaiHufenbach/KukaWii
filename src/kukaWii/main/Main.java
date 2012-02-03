@@ -35,8 +35,8 @@ public class Main {
 		collector = new DataCollector(mote);
 		SecurityService.createSecurityService(collector);
 		//collector.addConsumer(new SimulationConsumer());
-		collector.addConsumer(new ChartConsumer());
-		//collector.addConsumer(new PersistenceConsumer());
+		//collector.addConsumer(new ChartConsumer());
+		collector.addConsumer(new PersistenceConsumer());
 	}
 
 	public Connection getConnection(){

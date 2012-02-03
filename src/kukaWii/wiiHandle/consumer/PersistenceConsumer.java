@@ -31,16 +31,15 @@ public class PersistenceConsumer extends AbstractPacketConsumer{
 		if(packet instanceof MotionPlusPacket){
 			mopluPackets++;
 			if(mopluPackets%sysoutRate==0){
-				System.out.println("consumer");
-				System.out.println("MotionPlus Speed: "+(sysoutRate*1000/(packet.getTimestamp() -mopluTimestamp))+" Packets/sec");
-				mopluTimestamp = packet.getTimestamp();
+				System.out.println("MotionPlus Speed: "+(sysoutRate*1000/(packet.getTimestampMillis() -mopluTimestamp))+" Packets/sec");
+				mopluTimestamp = packet.getTimestampMillis();
 				mopluPackets = 0;
 			}
 		}else if(packet instanceof AccelerometerPacket){
 			accelPackets++;
 			if(accelPackets%sysoutRate==0){
-				System.out.println("AccelPacket Speed: "+(sysoutRate*1000/(packet.getTimestamp() -accelTimestamp))+" Packets/sec");
-				accelTimestamp = packet.getTimestamp();
+				System.out.println("AccelPacket Speed: "+(sysoutRate*1000/(packet.getTimestampMillis() -accelTimestamp))+" Packets/sec");
+				accelTimestamp = packet.getTimestampMillis();
 				accelPackets = 0;
 			}
 		}
