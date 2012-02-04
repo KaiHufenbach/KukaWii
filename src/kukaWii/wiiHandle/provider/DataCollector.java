@@ -44,6 +44,7 @@ public class DataCollector extends AbstractPacketProvider implements MotionPlusL
 					motionPlus.addMotionPlusEventListener(instance);
 					System.out.println("Start Calibration");
 					motionPlus.newCalibration();
+					
 					mote.setReportMode(ReportModeRequest.DATA_REPORT_0x35);
 				}			
 			}

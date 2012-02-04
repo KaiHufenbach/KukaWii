@@ -4,6 +4,7 @@ import kukaWii.simulation.Simulator;
 import kukaWii.wiiHandle.consumer.ChartConsumer;
 import kukaWii.wiiHandle.consumer.PersistenceConsumer;
 import kukaWii.wiiHandle.consumer.SimulationConsumer;
+import kukaWii.wiiHandle.filter.AccelerometerFilter;
 import kukaWii.wiiHandle.internal.Connection;
 import kukaWii.wiiHandle.provider.DataCollector;
 import kukaWii.wiiHandle.security.SecurityService;
@@ -35,8 +36,9 @@ public class Main {
 		collector = new DataCollector(mote);
 		SecurityService.createSecurityService(collector);
 		//collector.addConsumer(new SimulationConsumer());
-		//collector.addConsumer(new ChartConsumer());
-		collector.addConsumer(new PersistenceConsumer());
+		collector.addConsumer(new AccelerometerFilter());
+		collector.addConsumer(new ChartConsumer());
+		//collector.addConsumer(new PersistenceConsumer());
 	}
 
 	public Connection getConnection(){
