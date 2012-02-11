@@ -7,7 +7,7 @@ import kukaWii.wiiHandle.consumer.SimulationConsumer;
 import kukaWii.wiiHandle.filter.AccelerometerFilter;
 import kukaWii.wiiHandle.internal.Connection;
 import kukaWii.wiiHandle.provider.DataCollector;
-import kukaWii.wiiHandle.security.SecurityService;
+import kukaWii.wiiHandle.service.SecurityService;
 import motej.Mote;
 
 /**

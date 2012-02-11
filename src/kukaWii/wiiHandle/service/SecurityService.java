@@ -1,8 +1,9 @@
-package kukaWii.wiiHandle.security;
+package kukaWii.wiiHandle.service;
 
 
 
 import kukaWii.wiiHandle.provider.DataCollector;
+import kukaWii.wiiHandle.security.InterruptException;
 
 public class SecurityService {
 	

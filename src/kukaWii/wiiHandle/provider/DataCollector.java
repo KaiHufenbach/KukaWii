@@ -58,7 +58,7 @@ public class DataCollector extends AbstractPacketProvider implements MotionPlusL
 
 	@Override
 	public void speedChanged(MotionPlusEvent evt) {
-		providePacket(new MotionPlusPacket(evt.getPitch(), evt.getPitchDownSpeed(),evt.getRoll(), evt.getRollLeftSpeed(), evt.getYaw(), evt.getYawLeftSpeed()));
+		providePacket(new MotionPlusPacket(evt.getPitchDownSpeed(),evt.getRollLeftSpeed(), evt.getYawLeftSpeed()));
 	}
 
 	@Override

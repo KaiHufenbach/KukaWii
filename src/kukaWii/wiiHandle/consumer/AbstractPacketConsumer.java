@@ -3,7 +3,7 @@ package kukaWii.wiiHandle.consumer;
 import java.util.concurrent.BlockingQueue;
 
 import kukaWii.wiiHandle.packet.AbstractPacket;
-import kukaWii.wiiHandle.security.SecurityService;
+import kukaWii.wiiHandle.service.SecurityService;
 
 /**
  * Abstrakte Basisimplementation fŸr einen PacketConsumer.

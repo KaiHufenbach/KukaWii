@@ -7,7 +7,7 @@ package kukaWii.wiiHandle.security;
  * @author Kai
  *
  */
-class InterruptException extends RuntimeException{
+public class InterruptException extends RuntimeException{
 	/**
 	 * 
 	 */

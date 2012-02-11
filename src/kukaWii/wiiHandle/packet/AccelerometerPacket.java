@@ -1,45 +1,45 @@
 package kukaWii.wiiHandle.packet;
 
+import javax.vecmath.Vector3d;
+
 public class AccelerometerPacket extends AbstractPacket{
 	
 	private static final long serialVersionUID = 4644188684655184819L;
 	
-	private double x;
-	private double y;
-	private double z;
+	private Vector3d vector;
 	
 	public AccelerometerPacket(double x, double y, double z){
 		super();
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		vector = new Vector3d(x, y, z);
 	}
 
 	public double getX() {
-		return x;
+		return vector.getX();
 	}
 
 	public double getY() {
-		return y;
+		return vector.getY();
 	}
 
 	public double getZ() {
-		return z;
+		return vector.getZ();
 	}
 
 	public void setX(double x) {
-		this.x = x;
+		vector.setX(x);
 	}
 
 	public void setY(double y) {
-		this.y = y;
+		vector.setY(y);
 	}
 
 	public void setZ(double z) {
-		this.z = z;
+		vector.setZ(z);
 	}
 	
-	
+	public double getLength(){
+		return vector.length();
+	}
 	
 	
 	

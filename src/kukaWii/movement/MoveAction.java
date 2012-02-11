@@ -12,6 +12,9 @@ public class MoveAction {
 	private double y;
 	private double z;
 	private double speed;
+	
+	//Maximale Geschwindigkeit
+	public static final double MAX_SPEED = 200;
 
 	/**
 	 * Erzeugt eine neue Bewegungsanweisung. Diese wird durch einen Vektor

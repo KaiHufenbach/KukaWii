@@ -27,13 +27,13 @@ public class NearestNeighbourFilter extends AbstractPacketFilter {
 		}
 
 		if (input instanceof MotionPlusPacket) {
-			double pitch = ((MotionPlusPacket) input).getPitch();
+//			double pitch = ((MotionPlusPacket) input).getPitch();
 			double pitchdownspeed = ((MotionPlusPacket) input)
 					.getPitchDownSpeed();
-			double roll = ((MotionPlusPacket) input).getRoll();
+//			double roll = ((MotionPlusPacket) input).getRoll();
 			double rollleftspeed = ((MotionPlusPacket) input)
 					.getRollLeftSpeed();
-			double yaw = ((MotionPlusPacket) input).getYaw();
+//			double yaw = ((MotionPlusPacket) input).getYaw();
 			double yawleftspeed = ((MotionPlusPacket) input).getYawLeftSpeed();
 		}
 

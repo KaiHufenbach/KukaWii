@@ -23,5 +23,10 @@
 			<attribute name="javadoc_location" value="http://www.jfree.org/jfreechart/api/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="ext/vecmath.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/KukaWii/ext/doc/java3d/java3d-1_5-spec.zip!/java3d-1_5-spec"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
