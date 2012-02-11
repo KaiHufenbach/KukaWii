@@ -16,7 +16,7 @@ import kukaWii.wiiHandle.packet.AbstractPacket;
  */
 public abstract class AbstractPacketProvider {
 
-	private BlockingQueue<AbstractPacket> out = new ArrayBlockingQueue<AbstractPacket>(10000, true);
+	private BlockingQueue<AbstractPacket> out = new ArrayBlockingQueue<AbstractPacket>(100, true);
 	private Lock providerLock = new ReentrantLock(true);
 	private IPacketConsumer consumer = null;
 	private IPacketConsumer lastConsumer = null;
